@@ -1,4 +1,5 @@
 import UserRow from './UserRow';
+import style from './UsersList.module.css';
 
 const UsersList = ({ users, children }) => {
 	const usersRendered = users.map(user => (
@@ -11,7 +12,7 @@ const UsersList = ({ users, children }) => {
 	));
 
 	return (
-		<div className='list'>
+		<div className={style.wrapper}>
 			{children}
 			{usersRendered}
 		</div>
