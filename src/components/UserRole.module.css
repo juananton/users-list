@@ -1,0 +1,15 @@
+.tag {
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	background-color: var(--color-light-gray);
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+}
+
+.tag.teacher {
+	background-color: var(--color-light-blue);
+}
+
+.tag.student {
+	background-color: var(--color-light-orange);
+}

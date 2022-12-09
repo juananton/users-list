@@ -1,4 +1,3 @@
-import Title from './components/Title';
 import UsersList from './components/UsersList';
 import './styles/index.css';
 
@@ -30,8 +29,8 @@ const USERS = [
 ];
 
 const App = () => (
-	<UsersList users={USERS}>
-		<Title>Listado de usuarios</Title>
+	<UsersList users={[USERS]}>
+		<h3>Users list</h3>
 	</UsersList>
 );
 

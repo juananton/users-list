@@ -1,0 +1,7 @@
+.active {
+	color: var(--color-green);
+}
+
+.inactive {
+	color: var(--color-gray);
+}
