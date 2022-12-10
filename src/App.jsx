@@ -15,7 +15,7 @@ const USERS = [
 		role: 'teacher'
 	},
 	{
-		name: 'Javier López',
+		name: 'Javier García',
 		id: 3,
 		active: false,
 		role: 'student'
@@ -25,11 +25,17 @@ const USERS = [
 		id: 4,
 		active: false,
 		role: 'assistant'
+	},
+	{
+		name: 'Alejandro González',
+		id: 5,
+		active: true,
+		role: 'student'
 	}
 ];
 
 const App = () => (
-	<UsersList users={[USERS]}>
+	<UsersList users={USERS}>
 		<h3>Users list</h3>
 	</UsersList>
 );
