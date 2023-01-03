@@ -34,10 +34,6 @@ const USERS = [
 	}
 ];
 
-const App = () => (
-	<UsersList users={USERS}>
-		<h3>Users list</h3>
-	</UsersList>
-);
+const App = () => <UsersList users={USERS} />;
 
 export default App;
