@@ -1,8 +1,18 @@
-const UserRow = ({ name, active, role, ...props }) => (
-  <div className='user' {...props}>
-    <span className='name'>{name}</span>
-    <span className='active'>{active}</span>
-    <span className='role'>{role}</span>
+import UserRole from './UserRole';
+import style from './UserRow.module.css';
+import UserStatus from './UserStatus';
+
+const UserRow = ({ name, active, role }) => (
+  <div className={style.user}>
+    <div className={style.name}>
+      <span>{name}</span>
+    </div>
+    <div className={style.status}>
+      <UserStatus active={active} />
+    </div>
+    <div className={style.role}>
+      <UserRole role={role} />
+    </div>
   </div>
 );
 

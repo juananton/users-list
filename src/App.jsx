@@ -3,18 +3,18 @@ import UsersList from './components/UsersList';
 const USERS = [
   {
     name: 'Pablo Castellanos',
-    active: 'Activo',
-    role: 'Profesor',
+    active: true,
+    role: 'teacher',
   },
   {
     name: 'José Miguel Fernández',
-    active: 'Activo',
-    role: 'Profesor',
+    active: true,
+    role: 'teacher',
   },
   {
     name: 'Javier lópez',
-    active: 'Activo',
-    role: 'Alumno',
+    active: false,
+    role: 'student',
   },
 ];
 
