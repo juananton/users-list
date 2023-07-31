@@ -4,22 +4,13 @@ import style from './UsersList.module.css';
 
 const UsersList = ({ users }) => {
   const [search, setSearch] = useState('');
-  const normalizeSearch = search.toLowerCase();
 
-  const usersFiltered = search
-    ? users.filter(user => user.name.toLowerCase().startsWith(normalizeSearch))
-    : users;
+  const usersFiltered = filterUsersByName(users, search);
+  const usersRendered = RenderUsers(usersFiltered);
 
-  const usersRendered =
-    usersFiltered.length > 0 ? (
-      usersFiltered.map(user => <UserRow key={user.name} {...user} />)
-    ) : (
-      <p>No hay usuarios</p>
-    );
   return (
     <div className={style.list}>
       <h1>Listado de usuarios</h1>
-
       <input
         type='text'
         name='search'
@@ -29,6 +20,21 @@ const UsersList = ({ users }) => {
       {usersRendered}
     </div>
   );
+};
+
+const filterUsersByName = (users, search) => {
+  if (!search) return users;
+
+  const lowerCasedSearch = search.toLowerCase();
+
+  return users.filter(user =>
+    user.name.toLowerCase().startsWith(lowerCasedSearch)
+  );
+};
+
+const RenderUsers = users => {
+  if (users.length <= 0) return <p>No hay usuarios</p>;
+  return users.map(user => <UserRow key={user.name} {...user} />);
 };
 
 export default UsersList;
