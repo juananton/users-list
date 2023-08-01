@@ -10,6 +10,7 @@ const UsersList = ({ users }) => {
   let usersFiltered = filterActiveUsers(users, onlyActive);
   usersFiltered = filterUsersByName(usersFiltered, search);
   usersFiltered = sortUsers(usersFiltered, sortBy);
+
   const usersRendered = RenderUsers(usersFiltered);
 
   return (
@@ -43,7 +44,7 @@ const UsersList = ({ users }) => {
 };
 
 const filterUsersByName = (users, search) => {
-  if (!search) return users;
+  if (!search) return [...users];
 
   const lowerCasedSearch = search.toLowerCase();
 
@@ -53,21 +54,22 @@ const filterUsersByName = (users, search) => {
 };
 
 const filterActiveUsers = (users, active) => {
-  if (!active) return users;
+  if (!active) return [...users];
 
   return users.filter(user => user.active);
 };
 
 const sortUsers = (users, sortBy) => {
+  const sortedUsers = [...users];
   switch (sortBy) {
     case 1:
-      return [...users].sort((a, b) => {
+      return sortedUsers.sort((a, b) => {
         if (a.name > b.name) return 1;
         if (a.name < b.name) return -1;
         return 0;
       });
     default:
-      return users;
+      return sortedUsers;
   }
 };
 
