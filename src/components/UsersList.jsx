@@ -3,8 +3,21 @@ import style from './UsersList.module.css';
 import UsersListFilters from './UsersListFilters';
 import UsersListRows from './UsersListRows';
 
-const UsersList = ({ users }) => {
+const UsersList = ({ initialUsers }) => {
   const { search, onlyActive, sortBy, ...setFilterFunctions } = useFilters();
+
+  const [users, setUsers] = useState(initialUsers);
+
+  const toggleUserActive = userId => {
+    const newUsers = [...users];
+
+    const userIndex = newUsers.findIndex(user => user.id === userId);
+    if (userIndex === -1) return;
+
+    newUsers[userIndex].active = !newUsers[userIndex].active;
+
+    setUsers(newUsers);
+  };
 
   let usersFiltered = filterActiveUsers(users, onlyActive);
   usersFiltered = filterUsersByName(usersFiltered, search);
@@ -19,7 +32,10 @@ const UsersList = ({ users }) => {
         sortBy={sortBy}
         {...setFilterFunctions}
       />
-      <UsersListRows users={usersFiltered} />
+      <UsersListRows
+        users={usersFiltered}
+        toggleUserActive={toggleUserActive}
+      />
     </div>
   );
 };
