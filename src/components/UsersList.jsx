@@ -61,7 +61,7 @@ const filterActiveUsers = (users, active) => {
 const sortUsers = (users, sortBy) => {
   switch (sortBy) {
     case 1:
-      return users.sort((a, b) => {
+      return [...users].sort((a, b) => {
         if (a.name > b.name) return 1;
         if (a.name < b.name) return -1;
         return 0;
