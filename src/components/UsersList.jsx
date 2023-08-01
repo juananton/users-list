@@ -4,9 +4,7 @@ import UsersListFilters from './UsersListFilters';
 import UsersListRows from './UsersListRows';
 
 const UsersList = ({ users }) => {
-  const [search, setSearch] = useState('');
-  const [onlyActive, setOnlyActive] = useState(false);
-  const [sortBy, setSortBy] = useState(0);
+  const { search, onlyActive, sortBy, ...setFilterFunctions } = useFilters();
 
   let usersFiltered = filterActiveUsers(users, onlyActive);
   usersFiltered = filterUsersByName(usersFiltered, search);
@@ -17,15 +15,45 @@ const UsersList = ({ users }) => {
       <h1>Listado de usuarios</h1>
       <UsersListFilters
         search={search}
-        setSearch={setSearch}
         onlyActive={onlyActive}
-        setOnlyActive={setOnlyActive}
         sortBy={sortBy}
-        setSortBy={setSortBy}
+        {...setFilterFunctions}
       />
       <UsersListRows users={usersFiltered} />
     </div>
   );
+};
+
+const useFilters = () => {
+  const [filters, setFilters] = useState({
+    search: '',
+    onlyActive: false,
+    sortBy: 0,
+  });
+
+  const setSearch = search =>
+    setFilters({
+      ...search,
+    });
+
+  const setOnlyActive = onlyActive =>
+    setFilters({
+      ...filters,
+      onlyActive,
+    });
+
+  const setSortBy = sortBy =>
+    setFilters({
+      ...filters,
+      sortBy,
+    });
+
+  return {
+    ...filters,
+    setSearch,
+    setOnlyActive,
+    setSortBy,
+  };
 };
 
 const filterUsersByName = (users, search) => {
