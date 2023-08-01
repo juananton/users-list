@@ -33,7 +33,8 @@ const useFilters = () => {
 
   const setSearch = search =>
     setFilters({
-      ...search,
+      ...filters,
+      search,
     });
 
   const setOnlyActive = onlyActive =>
