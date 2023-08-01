@@ -6,18 +6,7 @@ import UsersListRows from './UsersListRows';
 const UsersList = ({ initialUsers }) => {
   const { search, onlyActive, sortBy, ...setFilterFunctions } = useFilters();
 
-  const [users, setUsers] = useState(initialUsers);
-
-  const toggleUserActive = userId => {
-    const newUsers = [...users];
-
-    const userIndex = newUsers.findIndex(user => user.id === userId);
-    if (userIndex === -1) return;
-
-    newUsers[userIndex].active = !newUsers[userIndex].active;
-
-    setUsers(newUsers);
-  };
+  const { users, toggleUserActive } = useUsers(initialUsers);
 
   let usersFiltered = filterActiveUsers(users, onlyActive);
   usersFiltered = filterUsersByName(usersFiltered, search);
@@ -71,6 +60,23 @@ const useFilters = () => {
     setOnlyActive,
     setSortBy,
   };
+};
+
+const useUsers = initialUsers => {
+  const [users, setUsers] = useState(initialUsers);
+
+  const toggleUserActive = userId => {
+    const newUsers = [...users];
+
+    const userIndex = newUsers.findIndex(user => user.id === userId);
+    if (userIndex === -1) return;
+
+    newUsers[userIndex].active = !newUsers[userIndex].active;
+
+    setUsers(newUsers);
+  };
+
+  return { users, toggleUserActive };
 };
 
 const filterUsersByName = (users, search) => {
