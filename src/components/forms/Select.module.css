@@ -1,0 +1,30 @@
+.wrapper {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  padding-right: 3rem;
+  border: none;
+  outline: none;
+  appearance: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.select:focus-within {
+  box-shadow: var(--shadow-md);
+}
+
+.icon {
+  pointer-events: none;
+  position: absolute;
+  height: 1.5rem;
+  width: 1.5rem;
+  color: var(--colo-gray);
+  top: 0.5rem;
+  right: 0.75rem;
+  background-color: white;
+}

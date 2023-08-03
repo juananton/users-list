@@ -1,6 +1,7 @@
 import style from './UsersListFilters.module.css';
 import InputCheckBox from './forms/InputCheckBox';
 import InputSearch from './forms/InputSearch';
+import Select from './forms/Select';
 
 const UsersListFilters = ({
   search,
@@ -25,15 +26,16 @@ const UsersListFilters = ({
         />
         <span>Sólo activos</span>
       </div>
-      <select
+      <Select
         value={sortBy}
         onChange={ev => setSortBy(Number(ev.target.value))}
+        className={style.select}
       >
         <option value={0}>Por defecto</option>
         <option value={1}>Por nombre</option>
         <option value={2}>Por rol</option>
         {!onlyActive && <option value={3}>Por activación</option>}
-      </select>
+      </Select>
     </form>
   );
 };
