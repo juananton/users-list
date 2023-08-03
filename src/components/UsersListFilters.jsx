@@ -29,6 +29,8 @@ const UsersListFilters = ({
       >
         <option value={0}>Por defecto</option>
         <option value={1}>Por nombre</option>
+        <option value={2}>Por rol</option>
+        {!onlyActive && <option value={3}>Por activación</option>}
       </select>
     </form>
   );
