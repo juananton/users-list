@@ -1,9 +1,11 @@
 .input {
   opacity: 0;
   position: absolute;
+  z-index: -100;
 }
 
 .label {
+  cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;
