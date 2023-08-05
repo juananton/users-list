@@ -7,47 +7,49 @@ export const useFilters = () => {
     onlyActive: false,
     sortBy: SORT_OPTIONS.DEFAULT,
     page: 1,
-    itemsPerPage: 2,
+    itemsPerPage: 6,
   });
 
-  const setSearch = search =>
+  const setSearch = newSearch =>
     setFilters({
       ...filters,
       page: 1,
-      search,
+      search: newSearch,
     });
 
-  const setOnlyActive = onlyActive => {
+  const setOnlyActive = newOnlyActive => {
     const newSortBy =
-      onlyActive && filters.sortBy === SORT_OPTIONS.ACTIVE
+      newOnlyActive && filters.sortBy === SORT_OPTIONS.ACTIVE
         ? SORT_OPTIONS.DEFAULT
         : filters.sortBy;
 
     setFilters({
       ...filters,
       sortBy: newSortBy,
-      onlyActive,
+      page: 1,
+      onlyActive: newOnlyActive,
     });
   };
 
-  const setSortBy = sortBy =>
+  const setSortBy = newSortBy =>
     setFilters({
       ...filters,
       page: 1,
-      sortBy,
+      sortBy: newSortBy,
     });
 
-  const setPage = page => {
+  const setPage = newPage => {
     setFilters({
       ...filters,
-      page,
+      page: newPage,
     });
   };
 
-  const setItemsPerPage = itemsPerPage => {
+  const setItemsPerPage = newItemsPerPage => {
     setFilters({
       ...filters,
-      itemsPerPage,
+      page: 1,
+      itemsPerPage: newItemsPerPage,
     });
   };
 
