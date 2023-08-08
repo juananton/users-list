@@ -4,6 +4,7 @@ import style from './UsersList.module.css';
 import UsersListFilters from './UsersListFilters';
 import UsersListPagination from './UsersListPagination';
 import UsersListRows from './UsersListRows';
+import InputText from './forms/InputText';
 
 const UsersList = () => {
   const {
@@ -19,6 +20,11 @@ const UsersList = () => {
   return (
     <div className={style.wrapper}>
       <h1 className={style.title}>Listado de usuarios</h1>
+      <InputText
+        label='Nombre'
+        placeholder='Escribe aquí'
+        error='Cuidadín!!!'
+      />
       <UsersListFilters
         search={filters.search}
         onlyActive={filters.onlyActive}
