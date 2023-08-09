@@ -3,19 +3,12 @@
   height: 2.5rem;
   padding: 0.5rem 1rem;
   padding-left: 3rem;
-
-  border-radius: var(--radius-sm);
-  border: none;
-  box-shadow: var(--shadow-sm);
-  outline: none;
+  border: 1px solid var(--color-lightgray);
+  border-radius: var(--radius-md);
 }
 
-.input:focus {
-  box-shadow: var(--shadow-md);
-}
-
-.input::placeholder {
-  color: var(--color-lightgray);
+input::placeholder {
+  color: var(--color-gray);
 }
 
 .wrapper {
@@ -26,9 +19,8 @@
   pointer-events: none;
   height: 1.25rem;
   width: 1.25rem;
-  color: var(--color-lightgray);
   left: 1rem;
-  top: 0.575rem;
+  top: 0.65rem;
 
   position: absolute;
 }
