@@ -11,7 +11,6 @@ const PageSelector = ({ page, setPage, totalPages }) => {
   return (
     <div className={style.pageSelector}>
       <IconButton
-        filled
         disabled={isFirstPage}
         icon={ArrowLeftIcon}
         onClick={() => setPage(page - 1)}
@@ -20,7 +19,6 @@ const PageSelector = ({ page, setPage, totalPages }) => {
         Página {page} de {totalPages || 1}
       </p>
       <IconButton
-        filled
         disabled={isLastPage}
         icon={ArrowRightIcon}
         onClick={() => setPage(page + 1)}

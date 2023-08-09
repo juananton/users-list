@@ -1,9 +1,5 @@
+import { KIND_CLASSNAMES } from '../../constants/buttonClassNames';
 import style from './Button.module.css';
-
-const KIND_CLASSNAMES = {
-  primary: style.primary,
-  secondary: style.secondary,
-};
 
 const Button = ({ kind = 'primary', className, ...props }) => {
   return (
