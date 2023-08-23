@@ -11,10 +11,15 @@
   color: var(--color-lightgray);
 }
 
+.input:focus {
+  outline: 1px solid var(--color-blue);
+}
+
 .error .input {
   outline: 1px solid var(--color-red);
 }
 
 .error .message {
+  font-size: var(--text-sm);
   color: var(--color-red);
 }

@@ -14,15 +14,15 @@ const InputTextAsync = ({
   const icon = getIcon(loading, success, error);
 
   return (
-    <label className={`${style.wrapper} ${className || ''}`}>
+    <label
+      className={`${style.wrapper}  ${error ? style.error : ''} ${
+        className || ''
+      }`}
+    >
       <span className={style.label}>{label}</span>
-      <input
-        {...props}
-        className={`${style.input} ${error ? style.borderError : ''}`}
-        type='text'
-      ></input>
+      <input {...props} className={style.input} type='text'></input>
       {icon}
-      {error && <span className={style.error}>{error}</span>}
+      <div className={style.message}>{error}</div>
     </label>
   );
 };
