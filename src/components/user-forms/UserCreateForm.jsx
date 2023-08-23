@@ -16,8 +16,10 @@ function UserCreateForm({ onClose }) {
     e.preventDefault();
 
     const newUser = {
-      name: name,
-      username: username,
+      name: name.value,
+      username: username.value,
+      role: e.target.role.value,
+      active: e.target.active.checked,
     };
 
     console.log(newUser);
@@ -25,44 +27,46 @@ function UserCreateForm({ onClose }) {
   }
 
   return (
-    <form className={style.form} onSubmit={handleSubmit}>
+    <div className={style.wrapper}>
       <IconButton
         className={style.close}
         kind='primary'
         icon={CrossIcon}
         onClick={onClose}
       />
-      <div className={style.row}>
-        <InputText
-          className={style.input}
-          label={'Nombre'}
-          placeholder='John Doe'
-          value={name.value}
-          error={name.error}
-          onChange={e => setName(e.target.value)}
-        />
-        <InputTextAsync
-          className={style.input}
-          label='Username'
-          placeholder='johndoe...'
-          value={username.value}
-          error={username.error}
-          onChange={e => setUsername(e.target.value)}
-        />
-      </div>
-      <div className={style.row}>
-        <Select name='role' onChange={e => e.target.value}>
-          <option value={USER_ROLES.TEACHER}>Profesor</option>
-          <option value={USER_ROLES.STUDENT}>Alumno</option>
-          <option value={USER_ROLES.OTHER}>Otro</option>
-        </Select>
-        <div className={style.active}>
-          <InputCheckBox name='active' onChange={e => e.target.checked} />
-          <span>¿Activo?</span>
+      <form onSubmit={handleSubmit}>
+        <div className={style.row}>
+          <InputText
+            className={style.input}
+            label={'Nombre'}
+            placeholder='John Doe'
+            value={name.value}
+            error={name.error}
+            onChange={e => setName(e.target.value)}
+          />
+          <InputTextAsync
+            className={style.input}
+            label='Username'
+            placeholder='johndoe...'
+            value={username.value}
+            error={username.error}
+            onChange={e => setUsername(e.target.value)}
+          />
         </div>
-        <Button type='submit'>Crear usuario</Button>
-      </div>
-    </form>
+        <div className={style.row}>
+          <Select name='role'>
+            <option value={USER_ROLES.TEACHER}>Profesor</option>
+            <option value={USER_ROLES.STUDENT}>Alumno</option>
+            <option value={USER_ROLES.OTHER}>Otro</option>
+          </Select>
+          <div className={style.active}>
+            <InputCheckBox name='active' onChange={e => e.target.checked} />
+            <span>¿Activo?</span>
+          </div>
+          <Button type='submit'>Crear usuario</Button>
+        </div>
+      </form>
+    </div>
   );
 }
 

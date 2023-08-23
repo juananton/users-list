@@ -22,7 +22,6 @@ export const validateName = name => {
   if (name.includes('--')) return 'No puede tener doble guión';
 
   const nameSplitted = name.split(' ');
-  console.log(nameSplitted);
   for (const word of nameSplitted) {
     if (word.startsWith('-') || word.endsWith('-'))
       return 'Uso de guiones incorrecto';
