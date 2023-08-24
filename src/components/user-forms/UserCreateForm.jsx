@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { USER_ROLES } from '../../lib/contexts/UserRoles';
 import { useCreateForm } from '../../lib/hooks/useCreateForm';
 import Button from '../buttons/Button';
@@ -10,21 +11,16 @@ import CrossIcon from '../icons/CrossIcon';
 import style from './userCreateForm.module.css';
 
 function UserCreateForm({ onClose }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { name, username, setName, setUsername } = useCreateForm();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    const newUser = {
-      name: name.value,
-      username: username.value,
-      role: e.target.role.value,
-      active: e.target.active.checked,
-    };
-
-    console.log(newUser);
-    onClose();
-  }
+  const isDisabled =
+    !name.value ||
+    name.error ||
+    !username.value ||
+    username.error ||
+    username.loading ||
+    isSubmitting;
 
   return (
     <div className={style.wrapper}>
@@ -34,7 +30,11 @@ function UserCreateForm({ onClose }) {
         icon={CrossIcon}
         onClick={onClose}
       />
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={e =>
+          handleSubmit(e, name, username, setIsSubmitting, onClose)
+        }
+      >
         <div className={style.row}>
           <InputText
             className={style.input}
@@ -65,11 +65,40 @@ function UserCreateForm({ onClose }) {
             <InputCheckBox name='active' onChange={e => e.target.checked} />
             <span>¿Activo?</span>
           </div>
-          <Button type='submit'>Crear usuario</Button>
+          <Button type='submit' disabled={isDisabled}>
+            {isSubmitting ? 'Cargando...' : 'Crear usuario'}
+          </Button>
         </div>
       </form>
     </div>
   );
+}
+
+async function handleSubmit(e, name, username, setIsSubmitting, onClose) {
+  e.preventDefault();
+
+  setIsSubmitting(true);
+
+  const user = {
+    id: crypto.randomUUID(),
+    name: name.value,
+    username: username.value,
+    role: e.target.role.value,
+    active: e.target.active.checked,
+  };
+
+  const res = await fetch('http://localhost:4000/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  });
+
+  if (res.ok)
+    // TOD0: Actualizar los usuarios
+    onClose();
+  else {
+    setIsSubmitting(false);
+  }
 }
 
 export default UserCreateForm;

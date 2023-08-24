@@ -19,6 +19,13 @@
   border-color: var(--color-black);
 }
 
+.primary:disabled {
+  cursor: default;
+  color: var(--color-white);
+  border-color: var(--color-lightgray);
+  background-color: var(--color-lightgray);
+}
+
 .iconButton {
   width: 2.5rem;
   padding: 0;
