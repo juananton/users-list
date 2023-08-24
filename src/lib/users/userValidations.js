@@ -34,7 +34,7 @@ export const validateName = name => {
 
 // Validación asíncrona de disponibilidad del username
 
-export async function validateUsernameAsync(
+export async function validateUsernameIsAvailable(
   username,
   setUsernameError,
   signal
@@ -51,7 +51,8 @@ export async function validateUsernameAsync(
     } else {
       error = 'Error al validar';
     }
-  } catch {
+  } catch (err) {
+    if (err.name === 'AbortError') return;
     error = 'Error al validar';
   }
 

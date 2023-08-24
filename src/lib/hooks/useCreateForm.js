@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   validateName,
   validateUsername,
-  validateUsernameAsync,
+  validateUsernameIsAvailable,
 } from '../users/userValidations';
 
 export function useCreateForm() {
@@ -53,12 +53,19 @@ export function useCreateForm() {
     function () {
       if (formValues.username.loading) {
         const controller = new AbortController();
-        validateUsernameAsync(
-          formValues.username.value,
-          setUsernameError,
-          controller.signal
+
+        const timeoutId = setTimeout(
+          validateUsernameIsAvailable(
+            formValues.username.value,
+            setUsernameError,
+            controller.signal
+          ),
+          500
         );
-        return () => controller.abort();
+        return () => {
+          controller.abort();
+          clearTimeout(timeoutId);
+        };
       }
     },
     [formValues.username.loading, formValues.username.value]
