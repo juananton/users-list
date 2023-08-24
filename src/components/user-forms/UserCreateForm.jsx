@@ -1,5 +1,5 @@
 import { USER_ROLES } from '../../lib/contexts/UserRoles';
-import { useFormValues } from '../../lib/hooks/useForms';
+import { useCreateForm } from '../../lib/hooks/useCreateForm';
 import Button from '../buttons/Button';
 import IconButton from '../buttons/IconButton';
 import InputCheckBox from '../forms/InputCheckBox';
@@ -10,7 +10,7 @@ import CrossIcon from '../icons/CrossIcon';
 import style from './userCreateForm.module.css';
 
 function UserCreateForm({ onClose }) {
-  const { name, username, setName, setUsername } = useFormValues();
+  const { name, username, setName, setUsername } = useCreateForm();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -49,8 +49,10 @@ function UserCreateForm({ onClose }) {
             label='Username'
             placeholder='johndoe...'
             value={username.value}
+            loading={username.loading}
             error={username.error}
             onChange={e => setUsername(e.target.value)}
+            success={username.value && !username.loading && !username.error}
           />
         </div>
         <div className={style.row}>

@@ -1,3 +1,5 @@
+// Validación de formato
+
 const REGEX = {
   USERNAME: /^[a-z0-9]+$/,
   START_WITH_NUMBER: /^[0-9]/,
@@ -29,3 +31,29 @@ export const validateName = name => {
 
   if (name.length < 2 || name.length > 30) return 'Longitud entre 2 y 30';
 };
+
+// Validación asíncrona de disponibilidad del username
+
+export async function validateUsernameAsync(
+  username,
+  setUsernameError,
+  signal
+) {
+  let error;
+  try {
+    const res = await fetch(
+      `http://localhost:4000/users?username=${username}`,
+      { signal }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      if (data.length) error = 'Username no disponible';
+    } else {
+      error = 'Error al validar';
+    }
+  } catch {
+    error = 'Error al validar';
+  }
+
+  setUsernameError(error);
+}
